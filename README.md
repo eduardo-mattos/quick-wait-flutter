@@ -1,16 +1,28 @@
 # quick_wait_android
 
-A new Flutter project.
+## Estrutura do Projeto
 
-## Getting Started
+### Arquitetura
 
-This project is a starting point for a Flutter application.
+A Estrutura do projeto é feita com base na proposição de Robert Cecil Martin(Uncle Bob) no Livro Clean Archtecture, com adaptações propostas para Flutter Inicialmente pelo Reso Coder em seu canal no [Youtube](https://www.youtube.com/watch?v=KjE2IDphA_U&list=PLB6lc7nQ1n4iYGE_khpXRdJkJEp9WOech). Outros materiais referentes as proposições de arquiteturas limpas em Flutter Podem ser encontrados nos links a seguir:
 
-A few resources to get you started if this is your first Flutter project:
+- Canal do David [YouTube](https://www.youtube.com/watch?v=LwOACmXcNQ8&t=1s)
+- Clean Dart [Github](https://github.com/Flutterando/Clean-Dart)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Organização dos diretórios
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![image](https://user-images.githubusercontent.com/7063932/150779899-13bccabd-6a3a-4876-92dc-99bb424cc38c.png)
+
+Dentro da pasta lib podemos ver inicialmente outros três diretórios, que são: 
+
+- **commons**: Seu objetivo base é conter as classes e funções que serão compartilhadas pelas features.
+- **design_system**: Todos os Widgets e Detalhes de interface que serão reutilizados por Telas de features diferentes, como por Exemplo: Um card que aparece em várias partes da aplicação, botão com estilização específica, ou um TextField personalizado, etc.
+- **features**: Cada feature terá um diretório específico para conter os seus arquivos. Mais detalhes serão mostrados logo abaixo:
+
+#### Features
+
+![image](https://user-images.githubusercontent.com/7063932/150780715-15801ac3-dd1a-4a44-8c67-359795ffaa22.png)
+
+Como mostrado na imagem anterior, cada parte independente do nosso app terá um diretório para conter os seus arquivos.
+
+> Obs: Esta disposição é preliminar, com o tempo é normal que refatorações ocorram e os arquivos sejam reorganizados.
