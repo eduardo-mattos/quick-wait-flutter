@@ -11,25 +11,13 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blue.shade50,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Image.asset(
-              'assets/images/logo.png',
-              height: 130,
-              width: 130,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          const CircularProgressIndicator(),
-        ],
+    return DecoratedBox(
+        decoration: BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage('assets/images/splash.png'),
+        fit: BoxFit.cover,
       ),
-    );
+    ));
   }
 
   @override
