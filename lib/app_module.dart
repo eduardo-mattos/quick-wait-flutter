@@ -1,14 +1,15 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:quick_wait_android/features/auth/auth_module.dart';
-import 'package:quick_wait_android/pages/splash_page.dart';
+
+import 'features/auth/auth_module.dart';
+import 'pages/splash_page.dart';
 
 class AppModule extends Module {
   @override
-  List<Bind<Object>> get binds => super.binds;
+  List<Bind<Object>> get binds => [];
 
   @override
   List<ModularRoute> get routes => [
-    ModuleRoute('/auth', module: AuthModule()),
-    ChildRoute('/', child: (context, args) => SplashPage())
-  ];
+        ModuleRoute('/auth', module: AuthModule()),
+        ChildRoute('/', child: (context, args) => const SplashPage()),
+      ];
 }
