@@ -1,0 +1,1 @@
+const API_URL = "https://quick-wait/api/v1";
