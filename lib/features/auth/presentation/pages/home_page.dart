@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:quick_wait_android/features/auth/presentation/controllers/home_controller.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class HomePage extends StatefulWidget {
   HomePage() : super();
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage>{
     return Scaffold(
         body: Stack(
       children: [
-        Container(color: Colors.blue.shade50),
+        Container(color: HexColor("#E4FDFF")),
         SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -43,24 +44,26 @@ class _HomePageState extends State<HomePage>{
                   Buttons.Google,
                   text: "Entrar com o google ",
                   onPressed: () {},
+                  shape: StadiumBorder(),
                 )),
                 Container(
                     child: SignInButton(
                   Buttons.Facebook,
                   text: "Entrar com o facebook ",
                   onPressed: () {},
+                  shape: StadiumBorder(),
                 )),
                 Container(
                     child: Stack(
                   children: <Widget>[
                     Container(
                       width: double.infinity,
-                      height: 2,
+                      height: 3,
                       margin: EdgeInsets.fromLTRB(20, 20, 20, 10),
                       padding: EdgeInsets.only(bottom: 10),
                       decoration: BoxDecoration(
                         border: Border.all(
-                            color: Color.fromARGB(255, 51, 204, 255), width: 1),
+                            color: HexColor("#64D3D8"), width: 1,),
                         borderRadius: BorderRadius.vertical(),
                       ),
                     ),
@@ -68,11 +71,11 @@ class _HomePageState extends State<HomePage>{
                         left: 120,
                         top: 12,
                         child: Container(
-                          color: Colors.blue.shade50,
+                          color: HexColor("#E4FDFF"),
                           padding: EdgeInsets.only(left: 12, right: 12),
                           child: Text(
                             'OU',
-                            style: TextStyle(color: Colors.black, fontSize: 12),
+                            style: TextStyle(color:  HexColor("#12A1A7"), fontSize: 12),
                           ),
                         )),
                   ],
@@ -81,35 +84,38 @@ class _HomePageState extends State<HomePage>{
                     child: Container(
                         width: 220,
                         child: ElevatedButton(
-                          child: Text('ENTRAR ', style: TextStyle(color: Colors.grey.shade600)),
+                          child: Text('ENTRAR ', style: TextStyle(color: HexColor("#12A1A7"))),
                           onPressed: () {
                             // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
                           },
                           onLongPress: () {},
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.white
+                            primary: Colors.white,
+                            shape: StadiumBorder()
                           ),
                         ))),
                 Container(
                     child: Container(
                         width: 220,
                         child: ElevatedButton(
-                          child: Text('CADASTRAR-SE ',style: TextStyle(color: Colors.grey.shade600)),
+                          child: Text('CADASTRAR-SE ',style: TextStyle(color:  HexColor("#12A1A7"))),
                           onPressed: () {},
                           onLongPress: () {},
                            style: ElevatedButton.styleFrom(
-                            primary: Colors.white
+                            primary: Colors.white,
+                            shape: StadiumBorder()
                           ),
                         ))),
                 Container(
                     child: Container(
                         width: 220,
                         child: ElevatedButton(
-                          child: Text('ENTRAR COMO CONVIDADO', style: TextStyle(color: Colors.grey.shade600)),
+                          child: Text('ENTRAR COMO CONVIDADO', style: TextStyle(color:  HexColor("#12A1A7"))),
                           onPressed: () {},
                           onLongPress: () {},
                            style: ElevatedButton.styleFrom(
-                            primary: Colors.white
+                            primary: Colors.white,
+                            shape: StadiumBorder()
                           ),
                         ))),
               ],

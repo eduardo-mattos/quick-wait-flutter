@@ -12,9 +12,14 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: CircularProgressIndicator(),
-    );
+    return DecoratedBox(
+    decoration: BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage('assets/images/splash.png'),
+        fit: BoxFit.cover,
+      ),
+    )
+  );
   }
   @override
   void initState() {
