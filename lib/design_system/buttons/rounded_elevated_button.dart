@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class RoundedElevatedButton extends StatelessWidget {
   const RoundedElevatedButton({
@@ -13,7 +14,16 @@ class RoundedElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      child: Text(title, style: TextStyle(color: Colors.grey.shade600)),
+      child: Text(
+        title,
+        style: TextStyle(
+          color: HexColor(
+            "#12A1A7",
+          ),
+          fontSize: 18,
+          fontWeight: FontWeight.w300,
+        ),
+      ),
       onPressed: onPressed,
       onLongPress: onLongPress,
       style: ElevatedButton.styleFrom(

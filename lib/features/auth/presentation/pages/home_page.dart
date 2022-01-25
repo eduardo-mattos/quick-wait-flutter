@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:hexcolor/hexcolor.dart';
 
-import '../../../../commons/extensions/string_extension.dart';
 import '../../../../design_system/buttons/rounded_elevated_button.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blue.shade50,
+        backgroundColor: HexColor("#E4FDFF"),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -57,12 +57,11 @@ class _HomePageState extends State<HomePage> {
                         children: <Widget>[
                           Expanded(
                               child: Divider(
-                            color: "#ff64D3D8".toColor(),
+                            color: HexColor("#ff64D3D8"),
                             thickness: 4,
                             height: 2,
                           )),
                           Container(
-                            color: Colors.blue.shade50,
                             padding: const EdgeInsets.only(left: 12, right: 12),
                             child: const Text(
                               'OU',
@@ -71,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Expanded(
                               child: Divider(
-                            color: "#ff64D3D8".toColor(),
+                            color: HexColor("#ff64D3D8"),
                             thickness: 4,
                             height: 2,
                           )),
