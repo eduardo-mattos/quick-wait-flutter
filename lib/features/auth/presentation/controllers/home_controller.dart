@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class HomeController {
 
@@ -16,6 +17,6 @@ class HomeController {
 
 
   submitForm(context) async {
-
+    Modular.to.navigate('/auth/login');
   }
 }

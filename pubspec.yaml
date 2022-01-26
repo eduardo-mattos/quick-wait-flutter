@@ -26,6 +26,12 @@ dev_dependencies:
   flutter_lints: ^1.0.0
 
 flutter:
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand-Regular.ttf
+        - asset: assets/fonts/Quicksand-Bold.ttf
+          weight: 700
   uses-material-design: true
   assets:
    - assets/images/
