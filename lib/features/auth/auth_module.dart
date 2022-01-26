@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:quick_wait_android/features/auth/presentation/pages/login_page.dart';
 
 import 'data/repositories/auth_repository_impl.dart';
 import 'domain/repositories/auth_repository.dart';
@@ -13,5 +14,8 @@ class AuthModule extends Module {
       ];
 
   @override
-  List<ModularRoute> get routes => [ChildRoute('/', child: (context, args) => HomePage())];
+  List<ModularRoute> get routes => [
+    ChildRoute('/', child: (context, args) => HomePage()),
+    ChildRoute('/login', child: (context, args) => LoginPage()),
+  ];
 }

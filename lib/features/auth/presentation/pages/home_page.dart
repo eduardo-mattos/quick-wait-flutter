@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:quick_wait_android/features/auth/presentation/controllers/home_controller.dart';
 
 import '../../../../design_system/buttons/rounded_elevated_button.dart';
 
@@ -81,7 +82,9 @@ class _HomePageState extends State<HomePage> {
                         width: 220,
                         child: RoundedElevatedButton(
                           title: "Entrar",
-                          onPressed: () {},
+                          onPressed: () {
+                            HomeController().submitForm(context);
+                          },
                         )),
                     Container(
                         width: 220,
