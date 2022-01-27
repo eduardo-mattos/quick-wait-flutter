@@ -31,7 +31,7 @@ class HomeMenuPage extends StatelessWidget {
                   HomeLargeButton(
                     height: _buttonHeight,
                     onPressed: () => null,
-                    title: "LOCALIZAR HOSPITAIS",
+                    title: "HOSPITAIS",
                     icon: Image.asset(
                       "assets/icons/find_hospitals.png",
                     ),

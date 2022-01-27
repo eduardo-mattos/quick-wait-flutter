@@ -18,8 +18,8 @@ class HomeHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                width: 134,
-                height: 134,
+                width: 105,
+                height: 105,
                 child: Image.asset(
                   "assets/images/default_user_icon.png",
                   fit: BoxFit.cover,
