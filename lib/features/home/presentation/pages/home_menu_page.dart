@@ -1,13 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:quick_wait_android/features/home/presentation/controllers/home_menu_controller.dart';
 
 import '../../../../design_system/buttons/rounded_elevated_button.dart';
 import '../widgets/home_header.dart';
 import '../widgets/home_large_button.dart';
 
-class HomeMenuPage extends StatelessWidget {
-  const HomeMenuPage({Key? key}) : super(key: key);
+class HomeMenuPage extends StatefulWidget {
+  HomeMenuPage() : super();
+
+  @override
+  _HomeMenuPageState createState() => _HomeMenuPageState();
+}
+
+class _HomeMenuPageState extends State<HomeMenuPage> {
+  // const HomeMenuPage({Key? key}) : super(key: key);
   final double _buttonHeight = 90;
   final double _buttonsSpacing = 15;
 
@@ -30,7 +38,9 @@ class HomeMenuPage extends StatelessWidget {
                   const SizedBox(height: 20),
                   HomeLargeButton(
                     height: _buttonHeight,
-                    onPressed: () => null,
+                    onPressed: () {
+                      HomeMenuController().submitForm(context);
+                    },
                     title: "HOSPITAIS",
                     icon: Image.asset(
                       "assets/icons/find_hospitals.png",

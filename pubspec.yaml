@@ -18,6 +18,9 @@ dependencies:
   shared_preferences: ^2.0.12
   flutter_modular: ^4.4.0
   hexcolor: ^2.0.6
+  flutter_map: ^0.14.0
+  geolocator: ^8.0.5
+  location: ^4.3.0
 
 dev_dependencies:
   flutter_test:
