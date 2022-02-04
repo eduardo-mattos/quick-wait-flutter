@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -90,7 +91,9 @@ class _HomePageState extends State<HomePage> {
                         width: 220,
                         child: RoundedElevatedButton(
                           title: "Cadastrar-se",
-                          onPressed: () {},
+                          onPressed: () {
+                            Modular.to.pushNamed('/auth/signup');
+                          },
                         )),
                     Container(
                         width: 220,
