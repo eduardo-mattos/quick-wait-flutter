@@ -20,7 +20,7 @@ class HospitalPage extends StatefulWidget {
 class _HospitalPageState extends State<HospitalPage> {
   double latitude = 0;
   double longitude = 0;
-  MapController controller = new MapController();
+  List itemsList = [];
   
   void initState() {
     getUserLocation();
@@ -45,7 +45,12 @@ class _HospitalPageState extends State<HospitalPage> {
     var token = 'pk.eyJ1IjoibWF0aGV1c2hzb3V0byIsImEiOiJja3ozMTFyd2wwMjk3MzBtOGRvdG8wdXR0In0.5ZhExvzt7Xe0A37HsBLtUw';
     final uri = Uri.parse('$baseUrl' + bbox + '&limit=10' + '&language=pt-PT' + '&access_token=' + token);
     var response = await http.get(uri);
-    print(json.decode(response.body));
+
+    var items = json.decode(response.body);
+
+    items['features'].forEach((item) => {
+      itemsList.add(item['text_pt-PT'])
+    });
     return response;
   }
 
@@ -92,7 +97,6 @@ class _HospitalPageState extends State<HospitalPage> {
                                 color: Colors.red,
                                 iconSize: 45.0,
                                 onPressed: () {
-                                  print("Entrou aqui");
                                   showModalBottomSheet(
                                       context: context,
                                       builder: (builder) {
@@ -100,44 +104,17 @@ class _HospitalPageState extends State<HospitalPage> {
                                           color: HexColor("#E4FDFF"),
                                           child: Center(
                                             child: Column(
-                                              children: [
-                                                const SizedBox(height: 20),
-                                                HomeLargeButton(
+                                              children: itemsList.map((item) => 
+                                                 HomeLargeButton(
                                                   height: 50,
                                                   onPressed: () {},
-                                                  title: "UPA 24h",
+                                                  title: item,
                                                   icon: Image.asset(
                                                     "assets/icons/hospitals.png",
                                                   ),
                                                 ),
-                                                SizedBox(height: 15),
-                                                HomeLargeButton(
-                                                  height: 50,
-                                                  onPressed: () => null,
-                                                  title: "UPA 24h",
-                                                  icon: Image.asset(
-                                                    "assets/icons/hospitals.png",
-                                                  ),
-                                                ),
-                                                SizedBox(height: 15),
-                                                HomeLargeButton(
-                                                  height: 50,
-                                                  onPressed: () => null,
-                                                  title: "UPA 24h",
-                                                  icon: Image.asset(
-                                                    "assets/icons/hospitals.png",
-                                                  ),
-                                                ),
-                                                SizedBox(height: 15),
-                                                HomeLargeButton(
-                                                  height: 50,
-                                                  title: "UPA 24h",
-                                                  icon: Image.asset(
-                                                    "assets/icons/hospitals.png",
-                                                  ),
-                                                  onPressed: () => null,
-                                                ),
-                                              ],
+                                              )
+                                              .toList(),
                                             ),
                                           ),
                                         );
