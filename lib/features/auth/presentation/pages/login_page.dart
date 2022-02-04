@@ -110,7 +110,9 @@ class _LoginPageState extends State<LoginPage> {
                   padding: EdgeInsets.zero,
                   icon: const Icon(Icons.arrow_back_ios_rounded),
                   color: Colors.blue,
-                  onPressed: () {},
+                  onPressed: () {
+                    Modular.to.pop();
+                  },
                 ),
               ),
             )
