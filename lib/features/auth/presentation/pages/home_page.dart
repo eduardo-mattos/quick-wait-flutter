@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                     Container(
                         width: 220,
                         child: RoundedElevatedButton(
-                          title: "Entrar como convidado",
+                          title: "Convidado",
                           onPressed: () {},
                         )),
                   ],
