@@ -30,7 +30,7 @@ class HomeHeader extends StatelessWidget {
                 height: 28,
                 child: RoundedElevatedButton(
                   onPressed: () => Modular.to.pushNamed('/profile'),
-                  title: "Desconhecido",
+                  title: "John Doe",
                 ),
               )
             ],

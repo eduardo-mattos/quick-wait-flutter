@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:quick_wait_android/features/home/presentation/controllers/home_menu_controller.dart';
 
@@ -77,7 +78,7 @@ class _HomeMenuPageState extends State<HomeMenuPage> {
                   SizedBox(
                     width: 200,
                     child: RoundedElevatedButton(
-                      onPressed: () => null,
+                      onPressed: () => Modular.to.navigate('/auth'),
                       title: "SAIR",
                     ),
                   )
