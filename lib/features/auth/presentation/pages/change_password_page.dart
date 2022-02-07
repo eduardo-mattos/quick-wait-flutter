@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:quick_wait_android/design_system/buttons/circular_button.dart';
 import 'package:quick_wait_android/design_system/buttons/rounded_elevated_button.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage() : super();
-
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
+class ChangePasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +14,11 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.only(top: 180.0),
               child: Center(
-                child: Container(width: 200, height: 150, child: Image.asset('assets/images/logo.png')),
+                child: SizedBox(
+                  width: 200, 
+                  height: 150, 
+                  child: Image.asset('assets/images/logo.png')
+                ),
               ),
             ),
             Padding(
@@ -31,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Usuário:',
+                      'Nova senha:',
                       textAlign: TextAlign.start,
                       style: TextStyle(color: Colors.blue, fontSize: 18, fontFamily: 'Quicksand'),
                     ),
@@ -59,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Senha:',
+                    'Confirmar nova senha:',
                     textAlign: TextAlign.left,
                     style: TextStyle(color: Colors.blue, fontSize: 18, fontFamily: 'Quicksand'),
                   ),
@@ -82,29 +78,19 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            TextButton(
-              onPressed: () { Modular.to.pushNamed("/auth/forgotPassword"); },
-              child: const Text(
-                'Esqueceu sua senha? Clique aqui',
-                style: TextStyle(color: Colors.blue, fontSize: 15, fontFamily: 'Quicksand'),
-              ),
-            ),
-            Container(
-              height: 50,
-              width: 180,
-              decoration: BoxDecoration(color: HexColor("#E4FDFF"), borderRadius: BorderRadius.circular(17)),
-              child: RoundedElevatedButton(
-                title: "Entrar",
-                onPressed: () {
-                  Modular.to.navigate("/home");
-                },
-              ),
-            ),
-            CircularButton(
-              icon: const Icon(Icons.arrow_back_ios_rounded),
-              onPressed: () {
-                    Modular.to.pop();
+            Padding(
+              padding: const EdgeInsets.only(top: 40.0),
+              child: Container(
+                height: 50,
+                width: 180,
+                decoration: BoxDecoration(color: HexColor("#E4FDFF"), borderRadius: BorderRadius.circular(17)),
+                child: RoundedElevatedButton(
+                  title: "Enviar",
+                  onPressed: () {
+                    Modular.to.navigate("/home");
                   },
+                ),
+              ),
             ),
           ],
         ),

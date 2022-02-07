@@ -10,7 +10,7 @@ class GenericInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding:
-            const EdgeInsets.only(left: 15.0, right: 15.0, top: 20, bottom: 0),
+            const EdgeInsets.only(left: 15.0, right: 15.0, top: 10, bottom: 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

@@ -1,4 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:quick_wait_android/features/auth/presentation/pages/change_password_page.dart';
+import 'package:quick_wait_android/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:quick_wait_android/features/auth/presentation/pages/home_page.dart';
 import 'package:quick_wait_android/features/auth/presentation/pages/login_page.dart';
 import 'package:quick_wait_android/features/auth/presentation/pages/signup_page.dart';
@@ -19,5 +21,7 @@ class AuthModule extends Module {
     ChildRoute('/', child: (context, args) => HomePage()),
     ChildRoute('/login', child: (context, args) => LoginPage()),
     ChildRoute('/signup', child: (context, args) => SignupPage()),
+    ChildRoute('/forgotPassword', child: (context, args) => ForgotPasswordPage()),
+    ChildRoute('/changePassword', child: (context, args) => ChangePasswordPage()),
   ];
 }
