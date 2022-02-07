@@ -4,8 +4,6 @@ import 'package:quick_wait_android/features/profile/presentation/widgets/HealthP
 import 'package:quick_wait_android/features/profile/presentation/widgets/ChangePassword.dart';
 import 'package:quick_wait_android/features/profile/presentation/widgets/ProfileBackground.dart';
 
-import 'AddHealthPlanChips.dart';
-
 enum ImageSourceType { gallery, camera }
 
 class ProfileBody extends StatefulWidget {
@@ -213,7 +211,6 @@ class _ProfileBodyState extends State<ProfileBody> {
                   HealthPlan(title: 'Unimed BH'),
                   HealthPlan(title: 'Hapivida'),
                   HealthPlan(title: 'Humana'),
-                  const AddHealthPlanChips(),
                 ],
               ),
             ),
