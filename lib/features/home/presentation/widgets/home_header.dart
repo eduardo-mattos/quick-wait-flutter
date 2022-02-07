@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../design_system/buttons/rounded_elevated_button.dart';
 
@@ -28,7 +29,7 @@ class HomeHeader extends StatelessWidget {
               SizedBox(
                 height: 28,
                 child: RoundedElevatedButton(
-                  onPressed: () => null,
+                  onPressed: () => Modular.to.pushNamed('/profile'),
                   title: "Desconhecido",
                 ),
               )
