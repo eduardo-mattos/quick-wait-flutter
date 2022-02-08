@@ -81,13 +81,12 @@ class _HospitalPageState extends State<HospitalPage> {
                   icon: const Icon(Icons.location_on),
                   color: Colors.red,
                   iconSize: 45.0,
-                  onPressed: (  
-                    
-                  ) {
+                  onPressed: () {
                     var bottomSheet = showModalBottomSheet(
                         context: context,
                         builder: (builder) {
-                          getPolyline(item['coordinates'][1], item['coordinates'][0]);
+                          getPolyline(
+                              item['coordinates'][1], item['coordinates'][0]);
                           return Container(
                             color: HexColor("#90D8DC"),
                             child: SingleChildScrollView(
@@ -105,18 +104,29 @@ class _HospitalPageState extends State<HospitalPage> {
                                   ),
                                 ),
                                 Material(
-                                  elevation: 4.0,
-                                  shadowColor: Colors.grey,
-                                  borderRadius: BorderRadius.circular(17),
-                                  child: Align(
-                                    child: Text(
-                                      item['name'],
-                                      textAlign: TextAlign.left,
-                                      style:
-                                          TextStyle(height: 2.5, fontSize: 15),
-                                    ),
-                                  ),
-                                ),
+                                    elevation: 4.0,
+                                    shadowColor: Colors.grey,
+                                    borderRadius: BorderRadius.circular(17),
+                                    child: Row(
+                                      children: [
+                                        const SizedBox(width: 15),
+                                        const ImageIcon(
+                                          AssetImage(
+                                              "assets/icons/hospitals.png"),
+                                          size: 30,
+                                          color: Colors.black,
+                                        ),
+                                        const SizedBox(width: 15),
+                                        Flexible(
+                                          child: Text(
+                                            item['name'],
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                                height: 3.5, fontSize: 15),
+                                          ),
+                                        )
+                                      ],
+                                    )),
                                 const Padding(
                                   padding: EdgeInsets.only(top: 8, bottom: 8),
                                   child: Text(
@@ -132,15 +142,23 @@ class _HospitalPageState extends State<HospitalPage> {
                                   elevation: 4.0,
                                   shadowColor: Colors.grey,
                                   borderRadius: BorderRadius.circular(17),
-                                  child: const Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      '10 minutos',
-                                      textAlign: TextAlign.left,
-                                      style:
-                                          TextStyle(height: 2.5, fontSize: 15),
+                                  child: Row(
+                                      children: [
+                                        Builder(
+                                          builder: (context) {
+                                            return const SizedBox(width: 15);
+                                          }
+                                        ),
+                                        const Flexible(
+                                          child: Text(
+                                            '10 minutos',
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                height: 2.0, fontSize: 15),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                  ),
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(top: 8, bottom: 8),
@@ -157,15 +175,23 @@ class _HospitalPageState extends State<HospitalPage> {
                                   elevation: 4.0,
                                   shadowColor: Colors.grey,
                                   borderRadius: BorderRadius.circular(17),
-                                  child: const Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      '1,2km',
-                                      textAlign: TextAlign.left,
-                                      style:
-                                          TextStyle(height: 2.5, fontSize: 15),
+                                  child: Row(
+                                      children: [
+                                        Builder(
+                                          builder: (context) {
+                                            return const SizedBox(width: 15);
+                                          }
+                                        ),
+                                        const Flexible(
+                                          child: Text(
+                                            '1,2',
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                height: 2.0, fontSize: 15),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                  ),
                                 ),
                                 Row(
                                   children: [
@@ -176,6 +202,7 @@ class _HospitalPageState extends State<HospitalPage> {
                                       );
                                     }),
                                     Builder(builder: (context) {
+                                      const SizedBox(width: 15);
                                       return const Text(
                                         'Hospital mais próximo',
                                         textAlign: TextAlign.left,
@@ -196,6 +223,7 @@ class _HospitalPageState extends State<HospitalPage> {
                                       );
                                     }),
                                     Builder(builder: (context) {
+                                      const SizedBox(width: 15);
                                       return const Text(
                                         'Atende seu plano',
                                         textAlign: TextAlign.left,
@@ -219,11 +247,12 @@ class _HospitalPageState extends State<HospitalPage> {
                                       },
                                     ),
                                     CircularButton(
-                                      icon: const Icon(
-                                          Icons.check),
+                                      icon: const Icon(Icons.check),
                                       onPressed: () {
                                         MapsLauncher.launchCoordinates(
-                                            item['coordinates'][1], item['coordinates'][0], item['name']);
+                                            item['coordinates'][1],
+                                            item['coordinates'][0],
+                                            item['name']);
                                         // Modular.to.pop();
                                       },
                                     )
@@ -233,11 +262,11 @@ class _HospitalPageState extends State<HospitalPage> {
                             ),
                           );
                         });
-                     bottomSheet.then((value) {
-                       setState(() {
-                       points = [];
-                       });
-                     });   
+                    bottomSheet.then((value) {
+                      setState(() {
+                        points = [];
+                      });
+                    });
                   },
                 )));
       });
@@ -255,9 +284,8 @@ class _HospitalPageState extends State<HospitalPage> {
     var items = json.decode(response.body);
 
     setState(() {
-      items['routes'][0]['geometry']['coordinates'].forEach((item) => {
-      points.add(latLng.LatLng(item[1], item[0]))
-    }); 
+      items['routes'][0]['geometry']['coordinates']
+          .forEach((item) => {points.add(latLng.LatLng(item[1], item[0]))});
     });
   }
 
@@ -293,15 +321,14 @@ class _HospitalPageState extends State<HospitalPage> {
                             'pk.eyJ1IjoibWF0aGV1c2hzb3V0byIsImEiOiJja3ozMTFyd2wwMjk3MzBtOGRvdG8wdXR0In0.5ZhExvzt7Xe0A37HsBLtUw',
                         'id': 'mapbox.mapbox-streets-v8'
                       }),
-                  points.isEmpty ? MarkerLayerOptions(markers: markers) : PolylineLayerOptions(
-                    polylines: [
-                      Polyline(
-                        points: points,
-                        strokeWidth: 5.0,
-                        color: Colors.red
-                      )
-                    ]
-                  )  ,
+                  points.isEmpty
+                      ? MarkerLayerOptions(markers: markers)
+                      : PolylineLayerOptions(polylines: [
+                          Polyline(
+                              points: points,
+                              strokeWidth: 5.0,
+                              color: Colors.red)
+                        ]),
                 ],
               ),
       ]),
