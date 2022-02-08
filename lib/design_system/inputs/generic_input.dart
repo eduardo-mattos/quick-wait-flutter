@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 
 class GenericInput extends StatelessWidget {
   String label;
-  GenericInput({Key? key, required this.label}) : super(key: key);
+  late CrossAxisAlignment alignment;
+
+  GenericInput({
+    Key? key, 
+    required this.label,
+    required this.alignment
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +18,7 @@ class GenericInput extends StatelessWidget {
         padding:
             const EdgeInsets.only(left: 15.0, right: 15.0, top: 10, bottom: 0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: alignment,
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 8),

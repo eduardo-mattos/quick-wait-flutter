@@ -43,14 +43,17 @@ class _ChangePasswordState extends State<ChangePassword>
                   SizedBox(height: _size.height * 0.1),
                   GenericInput(
                     label: "Senha Atual",
+                    alignment: CrossAxisAlignment.start,
                   ),
                   SizedBox(height: _size.height * 0.03),
                   GenericInput(
                     label: "Nova Senha",
+                    alignment: CrossAxisAlignment.start,
                   ),
                   SizedBox(height: _size.height * 0.03),
                   GenericInput(
                     label: "Confirmar Senha",
+                    alignment: CrossAxisAlignment.start,
                   ),
                 ],
               ),

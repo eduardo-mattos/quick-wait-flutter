@@ -28,13 +28,34 @@ class _SignupPageState extends State<SignupPage> {
                     horizontal: 20.0, vertical: 20.0),
                 child: Column(
                   children: [
-                    GenericInput(label: 'Nome'),
-                    GenericInput(label: 'Data de Nascimento'),
-                    GenericInput(label: 'Celular'),
-                    GenericInput(label: 'E-mail'),
-                    GenericInput(label: 'CPF (Opicional)'),
-                    GenericInput(label: 'Senha'),
-                    GenericInput(label: 'Confirmar Senha'),
+                    GenericInput(
+                      label: 'Nome',
+                      alignment: CrossAxisAlignment.center,  
+                    ),
+                    GenericInput(
+                      label: 'Data de Nascimento',
+                      alignment: CrossAxisAlignment.center,
+                    ),
+                    GenericInput(
+                      label: 'Celular',
+                      alignment: CrossAxisAlignment.center,  
+                    ),
+                    GenericInput(
+                      label: 'E-mail',
+                      alignment: CrossAxisAlignment.center,
+                    ),
+                    GenericInput(
+                      label: 'CPF (Opicional)',
+                      alignment: CrossAxisAlignment.center,  
+                    ),
+                    GenericInput(
+                      label: 'Senha',
+                      alignment: CrossAxisAlignment.center,  
+                    ),
+                    GenericInput(
+                      label: 'Confirmar Senha',
+                      alignment: CrossAxisAlignment.center,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
