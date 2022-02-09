@@ -66,18 +66,18 @@ class _ProfileBodyState extends State<ProfileBody> {
                         size: 128,
                       ),
                       Positioned(
-                          bottom: 0,
-                          right: -25,
+                          bottom: -7,
+                          right: -62,
                           child: RawMaterialButton(
                             key: btnKey,
                             onPressed: () {},
-                            elevation: 2.0,
+                            elevation: 1.0,
                             fillColor: const Color(0xFFF5F6F9),
                             child: const Icon(
                               Icons.camera_alt_outlined,
                               color: Color(0xFF12A1A7),
                             ),
-                            padding: const EdgeInsets.all(15.0),
+                            // padding: const EdgeInsets.all(.0),
                             shape: const CircleBorder(),
                           )),
                     ],
