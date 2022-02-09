@@ -6,7 +6,7 @@
    <application
         android:label="quick_wait_android"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/quick">
         <activity
             android:name=".MainActivity"
             android:exported="true"
