@@ -59,7 +59,7 @@ class _HomeMenuPageState extends State<HomeMenuPage> {
                   SizedBox(height: _buttonsSpacing),
                   HomeLargeButton(
                     height: _buttonHeight,
-                    onPressed: () => null,
+                    onPressed: () => { Modular.to.pushNamed('/listNews') },
                     title: "NOTÍCIAS",
                     icon: Image.asset(
                       "assets/icons/news.png",

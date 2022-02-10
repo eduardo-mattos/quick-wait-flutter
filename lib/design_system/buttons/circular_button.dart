@@ -13,8 +13,8 @@ class CircularButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
-      width: 40,
+      height: 34,
+      width: 34,
       margin: const EdgeInsets.only(top: 30.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
