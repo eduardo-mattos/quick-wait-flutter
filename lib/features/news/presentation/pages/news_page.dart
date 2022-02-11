@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:quick_wait_android/features/news/presentation/widgets/newsBody.dart';
 import 'package:quick_wait_android/features/news/presentation/widgets/newsHeader.dart';
 
 class NewsPage extends StatelessWidget {
@@ -8,8 +9,9 @@ class NewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments;
-
+    dynamic args = ModalRoute.of(context)!.settings.arguments;
+    var dateString = DateTime.parse(args['publishedAt']);
+    print(args);
     return Scaffold(
       backgroundColor: HexColor("#E4FDFF"),
       body: SingleChildScrollView(
@@ -21,7 +23,7 @@ class NewsPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height / 3,
                 child: NewsHeader(news: args)),
-            Container()
+            NewsBody(news: args, dateString: dateString)
           ],
         ),
       ),

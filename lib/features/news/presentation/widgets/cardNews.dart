@@ -77,19 +77,23 @@ class CardNews extends StatelessWidget {
                           fontSize: 13,
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Modular.to.pushNamed(
-                            "/listNews/news",
-                            arguments: news
-                          );
-                        },
-                        child: const Text(
-                          'Ir para noticia >',
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.blue,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        heightFactor: 0.2,
+                        child: TextButton(
+                          onPressed: () {
+                            Modular.to.pushNamed(
+                              "/listNews/news",
+                              arguments: news
+                            );
+                          },
+                          child: const Text(
+                            'Ir para noticia >',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.blue,
+                            ),
                           ),
                         ),
                       )
