@@ -12,6 +12,8 @@ import 'package:geolocator/geolocator.dart'
 import 'package:http/http.dart' as http;
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:quick_wait_android/design_system/buttons/circular_button.dart';
+import 'package:quick_wait_android/design_system/buttons/rounded_elevated_button.dart';
+import 'package:quick_wait_android/design_system/inputs/generic_input.dart';
 import 'package:quick_wait_android/features/home/presentation/widgets/home_large_button.dart';
 
 class HospitalPage extends StatefulWidget {
@@ -143,22 +145,20 @@ class _HospitalPageState extends State<HospitalPage> {
                                   shadowColor: Colors.grey,
                                   borderRadius: BorderRadius.circular(17),
                                   child: Row(
-                                      children: [
-                                        Builder(
-                                          builder: (context) {
-                                            return const SizedBox(width: 15);
-                                          }
+                                    children: [
+                                      Builder(builder: (context) {
+                                        return const SizedBox(width: 15);
+                                      }),
+                                      const Flexible(
+                                        child: Text(
+                                          '10 minutos',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                              height: 2.0, fontSize: 15),
                                         ),
-                                        const Flexible(
-                                          child: Text(
-                                            '10 minutos',
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                                height: 2.0, fontSize: 15),
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(top: 8, bottom: 8),
@@ -176,22 +176,20 @@ class _HospitalPageState extends State<HospitalPage> {
                                   shadowColor: Colors.grey,
                                   borderRadius: BorderRadius.circular(17),
                                   child: Row(
-                                      children: [
-                                        Builder(
-                                          builder: (context) {
-                                            return const SizedBox(width: 15);
-                                          }
+                                    children: [
+                                      Builder(builder: (context) {
+                                        return const SizedBox(width: 15);
+                                      }),
+                                      const Flexible(
+                                        child: Text(
+                                          '1,2',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                              height: 2.0, fontSize: 15),
                                         ),
-                                        const Flexible(
-                                          child: Text(
-                                            '1,2',
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                                height: 2.0, fontSize: 15),
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                                 Row(
                                   children: [
@@ -270,6 +268,54 @@ class _HospitalPageState extends State<HospitalPage> {
                   },
                 )));
       });
+      Future.delayed(Duration(seconds: 0)).then((_) {
+        showModalBottomSheet(
+            context: context,
+            builder: (builder) {
+              return Container(
+                color: HexColor("#90D8DC"),
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.all(12),
+                    child: Column(
+                      children: [
+                        ...itemsList.map((title) {
+                          return Column(
+                            children: [
+                            const Padding(
+                              padding: EdgeInsets.only(top: 8, bottom: 8),
+                            ),
+                            Material(
+                              elevation: 4.0,
+                              shadowColor: Colors.grey,
+                              borderRadius: BorderRadius.circular(17),
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 15),
+                                  const ImageIcon(
+                                    AssetImage("assets/icons/hospitals.png"),
+                                    size: 30,
+                                    color: Colors.black,
+                                  ),
+                                  const SizedBox(width: 15),
+                                  Flexible(
+                                    child: Text(
+                                      title,
+                                      textAlign: TextAlign.left,
+                                      style: const TextStyle(
+                                          height: 3.5, fontSize: 15),
+                                    ),
+                                  )
+                                ],
+                              ))
+                            ]
+                          );
+                        }).toList(),
+                      ],
+                    ),
+                ),
+              );
+            });
+      });
     });
     return response;
   }
@@ -303,11 +349,39 @@ class _HospitalPageState extends State<HospitalPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: HexColor("#90D8DC"),
+        title: Material(
+          elevation: 4.0,
+          shadowColor: Colors.grey,
+          borderRadius: BorderRadius.circular(17),
+          child: Row(
+            children: [
+              Builder(builder: (context) {
+                return SizedBox(width: 15);
+              }),
+              const Icon(
+                Icons.search,
+                color: Colors.black,
+              ),
+              SizedBox(width: 15),
+              const Flexible(
+                child: TextField(
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(fontSize: 18),
+                ),
+              ),
+            ],
+          ),
+        ), 
+        automaticallyImplyLeading: false,
+      ),
       resizeToAvoidBottomInset: false,
       body: Stack(children: [
         latitude == 0
             ? Container()
-            : FlutterMap(
+            : 
+            FlutterMap(
                 options: MapOptions(
                   center: latLng.LatLng(latitude, longitude),
                   zoom: 13.0,

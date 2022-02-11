@@ -31,7 +31,7 @@ class ProfileBackground extends StatelessWidget {
               ));
     return SizedBox(
       width: double.infinity,
-      height: size.height / 1.8,
+      height: size.height / 1.4,
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
@@ -40,7 +40,7 @@ class ProfileBackground extends StatelessWidget {
             right: -2,
             left: -2,
             child: Container(
-              height: size.height / 1.8,
+              height: size.height / 1.4,
               decoration: backGroudProps,
               child: imageUrl == null
                   ? BackdropFilter(

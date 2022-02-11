@@ -8,7 +8,7 @@ class ForgotPasswordLowerBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: const Color(0xFFCDFAF5),
-      height: MediaQuery.of(context).size.height / 1.5,
+      height: MediaQuery.of(context).size.height / 1,
       child: Column(
         children: [
           Padding(

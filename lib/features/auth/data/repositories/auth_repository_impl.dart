@@ -13,6 +13,6 @@ class AuthRepositoryImpl implements AuthRepository {
 
     final response = await http.post(Uri.parse("$API_URL/login"), body: map);
     final data = json.decode(response.body);
-    return UserEntity(email: data['email'], name: data['name']);
+    return UserEntity(name: data['name'], password: data['password']);
   }
 }
