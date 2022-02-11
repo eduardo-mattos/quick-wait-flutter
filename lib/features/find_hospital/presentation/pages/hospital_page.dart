@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:geolocator/geolocator.dart';
@@ -29,15 +30,72 @@ class _HospitalPageState extends State<HospitalPage> {
   List coordinatesList = [];
   List<Marker> markers = [];
   List<latLng.LatLng> points = [];
+  bool isLoading = false;
+  List<String> autoCompleteData = [];
+  List searchCoordinates = [];
+  final MapController mapController = MapController();
+  @override
   void initState() {
     getUserLocation();
     super.initState();
+  }
+
+  Future getItems(query) async {
+    var baseUrl =
+        'https://api.mapbox.com/geocoding/v5/mapbox.places/$query.json?';
+    var types = 'types=place%2Cpostcode%2Caddress&';    
+    var token =
+        'access_token=pk.eyJ1IjoibWF0aGV1c2hzb3V0byIsImEiOiJja3ozMTFyd2wwMjk3MzBtOGRvdG8wdXR0In0.5ZhExvzt7Xe0A37HsBLtUw';
+   final uri = Uri.parse(
+        baseUrl +
+        types +
+        token
+  );
+  var response = await http.get(uri);
+
+  if (response.statusCode != 200) {
+    return;
+  }
+  var items = json.decode(response.body);
+
+  final List<String> placeNameList = [];
+    items['features'].forEach((item) => {
+      placeNameList.add(item['place_name']),
+      searchCoordinates.add({"place_name": item['place_name'], "latitude": item['center'][1], "longitude": item['center'][0]})
+    });
+
+    setState(() {
+      isLoading = false;
+      autoCompleteData = placeNameList;
+    });
+    
+  return placeNameList; 
   }
 
   Future<Position> locateUser() async {
     return await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
   }
+
+  Future setLocate(locate) async {
+    coordinatesList.clear();
+    itemsList.clear();
+    return innerFunction(locate);
+  }
+
+  innerFunction(locate) {
+    var a;
+      for (var element in searchCoordinates) {
+        if(element['place_name'] == locate){
+            latitude = element['latitude'];
+            longitude = element['longitude'];
+            a = latLng.LatLng(element['latitude'], element['longitude']);
+            getHospitalsLocation();
+            return mapController.move(a, mapController.zoom);
+        }
+      }
+      return false;
+    }
 
   Future getHospitalsLocation() async {
     var longitudeMin = longitude - 0.05;
@@ -73,7 +131,7 @@ class _HospitalPageState extends State<HospitalPage> {
         });
 
     setState(() {
-      coordinatesList.forEach((item) {
+      for (var item in coordinatesList) {
         markers.add(Marker(
             width: 80.0,
             height: 80.0,
@@ -267,7 +325,7 @@ class _HospitalPageState extends State<HospitalPage> {
                     });
                   },
                 )));
-      });
+      }
       Future.delayed(Duration(seconds: 0)).then((_) {
         showModalBottomSheet(
             context: context,
@@ -365,11 +423,29 @@ class _HospitalPageState extends State<HospitalPage> {
                 color: Colors.black,
               ),
               SizedBox(width: 15),
-              const Flexible(
-                child: TextField(
-                  textAlign: TextAlign.left,
-                  style: const TextStyle(fontSize: 18),
-                ),
+              Flexible(
+                child: isLoading ? Center(child: CircularProgressIndicator(),) : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Autocomplete(
+                        optionsBuilder: (TextEditingValue textEditingValue) {
+                          getItems(textEditingValue.text);
+                          if(textEditingValue.text.isEmpty){
+                            return const Iterable<String>.empty();
+                          } else {
+                            return autoCompleteData.where((word) => word 
+                              .toLowerCase()
+                              .contains(textEditingValue.text.toLowerCase()));
+                          }
+                        },
+                        onSelected: (selectedString) {
+                          setLocate(selectedString);
+                        },
+                      )
+                    ],
+                  ),
+                )
               ),
             ],
           ),
@@ -382,6 +458,7 @@ class _HospitalPageState extends State<HospitalPage> {
             ? Container()
             : 
             FlutterMap(
+                mapController: mapController,
                 options: MapOptions(
                   center: latLng.LatLng(latitude, longitude),
                   zoom: 13.0,
