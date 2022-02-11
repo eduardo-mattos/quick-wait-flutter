@@ -31,7 +31,7 @@ class CardNews extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 164,
+                width: MediaQuery.of(context).size.width / 3.5,
                 height: 83,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(17.0),
