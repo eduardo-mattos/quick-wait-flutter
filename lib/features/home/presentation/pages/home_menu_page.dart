@@ -50,7 +50,7 @@ class _HomeMenuPageState extends State<HomeMenuPage> {
                   SizedBox(height: _buttonsSpacing),
                   HomeLargeButton(
                     height: _buttonHeight,
-                    onPressed: () => null,
+                    onPressed: () => { Modular.to.pushNamed('/stick')},
                     title: "LEMBRETES",
                     icon: Image.asset(
                       "assets/icons/medicine.png",

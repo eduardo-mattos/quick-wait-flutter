@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
+import 'package:intl/date_symbol_data_local.dart';
 import 'app_module.dart';
 
 void main() {
-  return runApp(ModularApp(module: AppModule(), child: const AppWidget()));
+   initializeDateFormatting().then((_) => runApp(ModularApp(module: AppModule(), child: const AppWidget())));
   // return runApp(ModularApp(module: /*<MainModule>*/, child: /*<MainWidget>*/));
 }
 
