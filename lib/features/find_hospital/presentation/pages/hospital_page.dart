@@ -15,6 +15,9 @@ import 'package:maps_launcher/maps_launcher.dart';
 import 'package:quick_wait_android/design_system/buttons/circular_button.dart';
 import 'package:quick_wait_android/design_system/buttons/rounded_elevated_button.dart';
 import 'package:quick_wait_android/design_system/inputs/generic_input.dart';
+import 'package:quick_wait_android/features/find_hospital/data/repositories/location_repository_impl.dart';
+import 'package:quick_wait_android/features/find_hospital/domain/repositories/location_repository.dart';
+import 'package:quick_wait_android/features/find_hospital/domain/usecases/find_location_use_cases.dart';
 import 'package:quick_wait_android/features/home/presentation/widgets/home_large_button.dart';
 
 class HospitalPage extends StatefulWidget {
@@ -34,36 +37,19 @@ class _HospitalPageState extends State<HospitalPage> {
   List<String> autoCompleteData = [];
   List searchCoordinates = [];
   final MapController mapController = MapController();
+  late FindLocationUseCase findLocation;
+
   @override
   void initState() {
-    getUserLocation();
     super.initState();
-  }
+    findLocation = FindLocationUseCaseImpl(LocationRepositoryImpl());
+    getUserLocation();
+}
 
   Future getItems(query) async {
-    var baseUrl =
-        'https://api.mapbox.com/geocoding/v5/mapbox.places/$query.json?';
-    var types = 'types=place%2Cpostcode%2Caddress&';    
-    var token =
-        'access_token=pk.eyJ1IjoibWF0aGV1c2hzb3V0byIsImEiOiJja3ozMTFyd2wwMjk3MzBtOGRvdG8wdXR0In0.5ZhExvzt7Xe0A37HsBLtUw';
-   final uri = Uri.parse(
-        baseUrl +
-        types +
-        token
-  );
-  var response = await http.get(uri);
-
-  if (response.statusCode != 200) {
-    return;
-  }
-  var items = json.decode(response.body);
-
-  final List<String> placeNameList = [];
-    items['features'].forEach((item) => {
-      placeNameList.add(item['place_name']),
-      searchCoordinates.add({"place_name": item['place_name'], "latitude": item['center'][1], "longitude": item['center'][0]})
-    });
-
+    var locations = await findLocation(query: query);
+    var placeNameList = locations.map((e) => e.placeName,).toList();
+    searchCoordinates = locations.map((e) => {'placeName': e.placeName, 'latitude': e.latitude, 'longitude': e.longitude}).toList();
     setState(() {
       isLoading = false;
       autoCompleteData = placeNameList;
@@ -86,7 +72,7 @@ class _HospitalPageState extends State<HospitalPage> {
   innerFunction(locate) {
     var a;
       for (var element in searchCoordinates) {
-        if(element['place_name'] == locate){
+        if(element['placeName'] == locate){
             latitude = element['latitude'];
             longitude = element['longitude'];
             a = latLng.LatLng(element['latitude'], element['longitude']);
@@ -430,10 +416,10 @@ class _HospitalPageState extends State<HospitalPage> {
                     children: [
                       Autocomplete(
                         optionsBuilder: (TextEditingValue textEditingValue) {
-                          getItems(textEditingValue.text);
                           if(textEditingValue.text.isEmpty){
                             return const Iterable<String>.empty();
                           } else {
+                            getItems(textEditingValue.text);
                             return autoCompleteData.where((word) => word 
                               .toLowerCase()
                               .contains(textEditingValue.text.toLowerCase()));
