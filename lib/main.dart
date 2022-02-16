@@ -2,9 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'app_module.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
-void main() {
-   initializeDateFormatting().then((_) => runApp(ModularApp(module: AppModule(), child: const AppWidget())));
+Future<void> main() async {
+  await SentryFlutter.init(
+    (options) {
+      options.dsn =
+          'https://7a4642b56784428bb60a265f7e9526ba@o1144940.ingest.sentry.io/6209545';
+      options.tracesSampleRate = 1.0;
+      options.tracesSampler = (samplingContext) {
+        // return a number between 0 and 1 or null (to fallback to configured value)
+      };
+    },
+    appRunner: () =>
+        runApp(ModularApp(module: AppModule(), child: const AppWidget())),
+  );
+
+  //  initializeDateFormatting().then((_) => runApp(ModularApp(module: AppModule(), child: const AppWidget())));
   // return runApp(ModularApp(module: /*<MainModule>*/, child: /*<MainWidget>*/));
 }
 
@@ -23,6 +37,9 @@ class _AppWidgetState extends State<AppWidget> {
       theme: ThemeData(
         fontFamily: 'Quicksand'
       ),
+      navigatorObservers: [
+        SentryNavigatorObserver()
+     ],
     ).modular();
   }
 }
