@@ -72,7 +72,7 @@ class _HomeMenuPageState extends State<HomeMenuPage> {
                     icon: Image.asset(
                       "assets/icons/settings.png",
                     ),
-                    onPressed: () => null,
+                    onPressed: () => Modular.to.navigate('/config'),
                   ),
                   SizedBox(height: _buttonsSpacing),
                   SizedBox(
