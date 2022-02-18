@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:quick_wait_android/features/config/config_module.dart';
 import 'package:quick_wait_android/features/find_hospital/hospital_module.dart';
 import 'package:quick_wait_android/features/news/presentation/news_module.dart';
 import 'package:quick_wait_android/features/profile/profile_module.dart';
@@ -20,6 +21,7 @@ class AppModule extends Module {
         ModuleRoute('/profile', module: ProfuleModule()),
         ModuleRoute('/hospital', module: HospitalModule()),
         ModuleRoute('/listNews', module: NewsModule()),
+        ModuleRoute('/config', module: ConfigModule()),
         ChildRoute('/', child: (context, args) => const SplashPage()),
       ];
 }
