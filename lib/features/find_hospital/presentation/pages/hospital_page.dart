@@ -1,24 +1,20 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:http/http.dart';
 import 'package:latlong2/latlong.dart' as latLng;
-import 'package:geolocator/geolocator.dart'
-    as geolocator; // or whatever name you want
 import 'package:http/http.dart' as http;
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:quick_wait_android/design_system/buttons/circular_button.dart';
-import 'package:quick_wait_android/design_system/buttons/rounded_elevated_button.dart';
-import 'package:quick_wait_android/design_system/inputs/generic_input.dart';
+import 'package:quick_wait_android/features/find_hospital/data/repositories/hospital_repository.impl.dart';
 import 'package:quick_wait_android/features/find_hospital/data/repositories/location_repository_impl.dart';
-import 'package:quick_wait_android/features/find_hospital/domain/repositories/location_repository.dart';
+import 'package:quick_wait_android/features/find_hospital/data/repositories/polyline_repository_impl.dart';
+import 'package:quick_wait_android/features/find_hospital/domain/usecases/find_hospital_use_cases.dart';
 import 'package:quick_wait_android/features/find_hospital/domain/usecases/find_location_use_cases.dart';
-import 'package:quick_wait_android/features/home/presentation/widgets/home_large_button.dart';
+import 'package:quick_wait_android/features/find_hospital/domain/usecases/find_polyline_use_cases.dart';
+import 'package:quick_wait_android/features/find_hospital/presentation/controllers/hospital_controller.dart';
 
 class HospitalPage extends StatefulWidget {
   HospitalPage() : super();
@@ -29,7 +25,6 @@ class HospitalPage extends StatefulWidget {
 class _HospitalPageState extends State<HospitalPage> {
   double latitude = 0;
   double longitude = 0;
-  List itemsList = [];
   List coordinatesList = [];
   List<Marker> markers = [];
   List<latLng.LatLng> points = [];
@@ -38,34 +33,37 @@ class _HospitalPageState extends State<HospitalPage> {
   List searchCoordinates = [];
   final MapController mapController = MapController();
   late FindLocationUseCase findLocation;
+  late FindHospitalUseCase findHospital;
+  late FindPolylineUseCase findPolyline;
 
   @override
   void initState() {
     super.initState();
     findLocation = FindLocationUseCaseImpl(LocationRepositoryImpl());
+    findHospital = FindHospitalUseCaseImpl(HospitalRepositoryImpl());
+    findPolyline = FindPolylineUseCaseImpl(PolylineRepositoryImpl());
     getUserLocation();
 }
 
   Future getItems(query) async {
     var locations = await findLocation(query: query);
     var placeNameList = locations.map((e) => e.placeName,).toList();
-    searchCoordinates = locations.map((e) => {'placeName': e.placeName, 'latitude': e.latitude, 'longitude': e.longitude}).toList();
+    searchCoordinates = locations
+        .map((e) => {
+              'placeName': e.placeName,
+              'latitude': e.latitude,
+              'longitude': e.longitude
+            })
+        .toList();
     setState(() {
       isLoading = false;
       autoCompleteData = placeNameList;
     });
-    
-  return placeNameList; 
-  }
-
-  Future<Position> locateUser() async {
-    return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+    return placeNameList; 
   }
 
   Future setLocate(locate) async {
     coordinatesList.clear();
-    itemsList.clear();
     return innerFunction(locate);
   }
 
@@ -84,37 +82,8 @@ class _HospitalPageState extends State<HospitalPage> {
     }
 
   Future getHospitalsLocation() async {
-    var longitudeMin = longitude - 0.05;
-    var latitudeMin = latitude - 0.05;
-    var longitudeMax = longitude + 0.05;
-    var latitudeMax = latitude + 0.05;
-
-    var baseUrl =
-        'https://api.mapbox.com/geocoding/v5/mapbox.places/Hospital%2Cupa.json?';
-
-    var bbox =
-        'bbox=${longitudeMin}%2C${latitudeMin}%2C${longitudeMax}%2C${latitudeMax}';
-    var token =
-        'pk.eyJ1IjoibWF0aGV1c2hzb3V0byIsImEiOiJja3ozMTFyd2wwMjk3MzBtOGRvdG8wdXR0In0.5ZhExvzt7Xe0A37HsBLtUw';
-    final uri = Uri.parse('$baseUrl' +
-        bbox +
-        '&limit=10' +
-        '&language=pt-PT' +
-        '&access_token=' +
-        token);
-    var response = await http.get(uri);
-
-    var items = json.decode(response.body);
-
-    Map result;
-    items['features'].forEach((item) => {
-          result = {
-            "coordinates": item['geometry']['coordinates'],
-            "name": item['text_pt-PT']
-          },
-          coordinatesList.add(result),
-          itemsList.add(item['text_pt-PT'])
-        });
+    var hospitals = await findHospital(latitude: latitude, longitude: longitude);
+    var coordinatesList = hospitals.map((e) => { 'name': e.name, 'latitude': e.latitude, 'longitude': e.longitude}).toList();
 
     setState(() {
       for (var item in coordinatesList) {
@@ -122,7 +91,7 @@ class _HospitalPageState extends State<HospitalPage> {
             width: 80.0,
             height: 80.0,
             point:
-                latLng.LatLng(item['coordinates'][1], item['coordinates'][0]),
+                latLng.LatLng(item['latitude'] as double, item['longitude'] as double),
             builder: (context) => IconButton(
                   icon: const Icon(Icons.location_on),
                   color: Colors.red,
@@ -132,11 +101,11 @@ class _HospitalPageState extends State<HospitalPage> {
                         context: context,
                         builder: (builder) {
                           getPolyline(
-                              item['coordinates'][1], item['coordinates'][0]);
+                              item['latitude'] as double, item['longitude'] as double);
                           return Container(
                             color: HexColor("#90D8DC"),
                             child: SingleChildScrollView(
-                              padding: EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(12),
                               child: Column(children: [
                                 const Padding(
                                   padding: EdgeInsets.only(top: 8, bottom: 8),
@@ -165,7 +134,7 @@ class _HospitalPageState extends State<HospitalPage> {
                                         const SizedBox(width: 15),
                                         Flexible(
                                           child: Text(
-                                            item['name'],
+                                            item['name'] as String,
                                             textAlign: TextAlign.left,
                                             style: const TextStyle(
                                                 height: 3.5, fontSize: 15),
@@ -292,9 +261,9 @@ class _HospitalPageState extends State<HospitalPage> {
                                       icon: const Icon(Icons.check),
                                       onPressed: () {
                                         MapsLauncher.launchCoordinates(
-                                            item['coordinates'][1],
-                                            item['coordinates'][0],
-                                            item['name']);
+                                            item['latitude'] as double,
+                                            item['longitude'] as double,
+                                            item['name'] as String);
                                         // Modular.to.pop();
                                       },
                                     )
@@ -322,7 +291,7 @@ class _HospitalPageState extends State<HospitalPage> {
                     padding: EdgeInsets.all(12),
                     child: Column(
                       children: [
-                        ...itemsList.map((title) {
+                        ...coordinatesList.map((title) {
                           return Column(
                             children: [
                             const Padding(
@@ -343,7 +312,7 @@ class _HospitalPageState extends State<HospitalPage> {
                                   const SizedBox(width: 15),
                                   Flexible(
                                     child: Text(
-                                      title,
+                                      title['name'] as String,
                                       textAlign: TextAlign.left,
                                       style: const TextStyle(
                                           height: 3.5, fontSize: 15),
@@ -361,26 +330,25 @@ class _HospitalPageState extends State<HospitalPage> {
             });
       });
     });
-    return response;
+    // return response;
   }
 
   Future getPolyline(lat, long) async {
-    var baseUrl = 'https://api.mapbox.com/v4/directions/mapbox.driving/';
-    var coordinates = '$longitude,$latitude;$long,$lat.json?access_token=';
-    var token =
-        'pk.eyJ1IjoibWF0aGV1c2hzb3V0byIsImEiOiJja3ozMTFyd2wwMjk3MzBtOGRvdG8wdXR0In0.5ZhExvzt7Xe0A37HsBLtUw';
-    final uri = Uri.parse(baseUrl + coordinates + token);
-    var response = await http.get(uri);
-    var items = json.decode(response.body);
+    var polylines = await findPolyline(currentLatitude: latitude, currentLongitude: longitude, latitude: lat, longitude: long);
+    var polylinesList = polylines.map((e) => {
+      'latitude': e.latitude,
+      'longitude': e.longitude
+    }).toList();
 
     setState(() {
-      items['routes'][0]['geometry']['coordinates']
-          .forEach((item) => {points.add(latLng.LatLng(item[1], item[0]))});
+      polylinesList.forEach((element) { 
+        points.add(latLng.LatLng(element['latitude'] as double, element['longitude'] as double));
+      });
     });
   }
 
   getUserLocation() async {
-    var currentLocation = await locateUser();
+    var currentLocation = await HospitalController().getLocate();
 
     setState(() {
       latitude = currentLocation.latitude;
