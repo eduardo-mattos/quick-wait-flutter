@@ -28,6 +28,8 @@ dependencies:
   rflutter_alert: ^2.0.4
   table_calendar: ^3.0.3
   sentry_flutter: ^6.3.0
+  dartz:
+  dio:
 
 dev_dependencies:
   flutter_test:
