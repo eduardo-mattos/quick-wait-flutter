@@ -26,68 +26,58 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.only(top: 180.0),
                 child: Center(
-                  child: Container(
-                      width: 200,
-                      height: 150,
-                      child: Image.asset('assets/images/logo.png')),
+                  child: Container(width: 200, height: 150, child: Image.asset('assets/images/logo.png')),
                 ),
               ),
               Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15.0, right: 15.0, top: 20, bottom: 0),
-                  child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 15.0, right: 15.0, top: 10, bottom: 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.only(bottom: 8),
-                            child: Text(
-                              'Usuário',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Color(0xFF12A1A7),
-                                  fontSize: 20,
-                                  fontFamily: 'Quicksand'),
+                padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 20, bottom: 0),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10, bottom: 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: Text(
+                          'Usuário',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Color(0xFF12A1A7), fontSize: 20, fontFamily: 'Quicksand'),
+                        ),
+                      ),
+                      Material(
+                        elevation: 4.0,
+                        shadowColor: Colors.grey,
+                        borderRadius: BorderRadius.circular(17),
+                        child: TextFormField(
+                          onChanged: (text) {},
+                          keyboardType: TextInputType.emailAddress,
+                          initialValue: LoginController().formData.name,
+                          onSaved: (String? value) {
+                            LoginController().formData.name = value.toString();
+                          },
+                          style: const TextStyle(height: 0.6),
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            filled: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.grey, width: 0.2),
+                              borderRadius: BorderRadius.circular(17),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(17),
                             ),
                           ),
-                          Material(
-                            elevation: 4.0,
-                            shadowColor: Colors.grey,
-                            borderRadius: BorderRadius.circular(17),
-                            child: TextFormField(
-                              onChanged: (text) {},
-                              keyboardType: TextInputType.emailAddress,
-                              initialValue: LoginController().formData.name, 
-                              onSaved: (String? value){
-                                LoginController().formData.name = value.toString();
-                              },
-                              style: const TextStyle(height: 0.6),
-                              decoration: InputDecoration(
-                                fillColor: Colors.white,
-                                filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.grey, width: 0.2),
-                                  borderRadius: BorderRadius.circular(17),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(17),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ))),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
               Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15.0, right: 15.0, top: 20, bottom: 0),
+                  padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 20, bottom: 0),
                   child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 15.0, right: 15.0, top: 10, bottom: 0),
+                      padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10, bottom: 0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -96,10 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: Text(
                               'Senha',
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Color(0xFF12A1A7),
-                                  fontSize: 20,
-                                  fontFamily: 'Quicksand'),
+                              style: TextStyle(color: Color(0xFF12A1A7), fontSize: 20, fontFamily: 'Quicksand'),
                             ),
                           ),
                           Material(
@@ -110,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                               onChanged: (text) {},
                               obscureText: true,
                               initialValue: LoginController().formData.password,
-                              onSaved: (String? value){
+                              onSaved: (String? value) {
                                 LoginController().formData.password = value.toString();
                               },
                               style: const TextStyle(height: 0.6),
@@ -118,13 +105,11 @@ class _LoginPageState extends State<LoginPage> {
                                 fillColor: Colors.white,
                                 filled: true,
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.grey, width: 0.2),
+                                  borderSide: const BorderSide(color: Colors.grey, width: 0.2),
                                   borderRadius: BorderRadius.circular(17),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: Colors.grey),
+                                  borderSide: const BorderSide(color: Colors.grey),
                                   borderRadius: BorderRadius.circular(17),
                                 ),
                               ),
@@ -138,18 +123,13 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 child: const Text(
                   'Esqueceu sua senha? Clique aqui',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 15,
-                      fontFamily: 'Quicksand'),
+                  style: TextStyle(color: Colors.blue, fontSize: 15, fontFamily: 'Quicksand'),
                 ),
               ),
               Container(
                 height: 50,
                 width: 180,
-                decoration: BoxDecoration(
-                    color: HexColor("#E4FDFF"),
-                    borderRadius: BorderRadius.circular(17)),
+                decoration: BoxDecoration(color: HexColor("#E4FDFF"), borderRadius: BorderRadius.circular(17)),
                 child: RoundedElevatedButton(
                   title: "Entrar",
                   onPressed: () {

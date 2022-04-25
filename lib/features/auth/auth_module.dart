@@ -13,15 +13,15 @@ class AuthModule extends Module {
   @override
   List<Bind<Object>> get binds => [
         Bind.lazySingleton<AuthRepository>((i) => AuthRepositoryImpl()),
-        Bind.lazySingleton<LoginUseCase>((i) => LoginUseCaseImpl(i()))
+        Bind.lazySingleton<LoginUseCase>((i) => LoginUseCaseImpl(i())),
       ];
 
   @override
   List<ModularRoute> get routes => [
-    ChildRoute('/', child: (context, args) => HomePage()),
-    ChildRoute('/login', child: (context, args) => LoginPage()),
-    ChildRoute('/signup', child: (context, args) => SignupPage()),
-    ChildRoute('/forgotPassword', child: (context, args) => ForgotPasswordPage()),
-    ChildRoute('/changePassword', child: (context, args) => ChangePasswordPage()),
-  ];
+        ChildRoute('/', child: (context, args) => HomePage()),
+        ChildRoute('/login', child: (context, args) => LoginPage()),
+        ChildRoute('/signup', child: (context, args) => SignupPage()),
+        ChildRoute('/forgotPassword', child: (context, args) => ForgotPasswordPage()),
+        ChildRoute('/changePassword', child: (context, args) => ChangePasswordPage()),
+      ];
 }
