@@ -50,7 +50,7 @@ class _HomeMenuPageState extends State<HomeMenuPage> {
                   SizedBox(height: _buttonsSpacing),
                   HomeLargeButton(
                     height: _buttonHeight,
-                    onPressed: () => { Modular.to.pushNamed('/stick')},
+                    onPressed: () => {Modular.to.pushNamed('/stick')},
                     title: "LEMBRETES",
                     icon: Image.asset(
                       "assets/icons/medicine.png",
@@ -59,7 +59,7 @@ class _HomeMenuPageState extends State<HomeMenuPage> {
                   SizedBox(height: _buttonsSpacing),
                   HomeLargeButton(
                     height: _buttonHeight,
-                    onPressed: () => { Modular.to.pushNamed('/listNews') },
+                    onPressed: () => {Modular.to.pushNamed('/listNews')},
                     title: "NOTÍCIAS",
                     icon: Image.asset(
                       "assets/icons/news.png",
@@ -72,7 +72,7 @@ class _HomeMenuPageState extends State<HomeMenuPage> {
                     icon: Image.asset(
                       "assets/icons/settings.png",
                     ),
-                    onPressed: () => Modular.to.navigate('/config'),
+                    onPressed: () => Modular.to.pushNamed('/config'),
                   ),
                   SizedBox(height: _buttonsSpacing),
                   SizedBox(
