@@ -50,10 +50,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     child: const Text(
                       'CONFIGURAÇÕES',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color(0xFF12A1A7),
-                          fontSize: 20,
-                          fontFamily: 'Quicksand'),
+                      style: TextStyle(color: Color(0xFF12A1A7), fontSize: 20, fontFamily: 'Quicksand'),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -61,9 +58,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     margin: const EdgeInsets.only(left: 35, top: 20),
                     height: 45,
                     width: 250,
-                    decoration: BoxDecoration(
-                        color: HexColor("#E4FDFF"),
-                        borderRadius: BorderRadius.circular(17)),
+                    decoration: BoxDecoration(color: HexColor("#E4FDFF"), borderRadius: BorderRadius.circular(17)),
                     child: RoundedElevatedButton(
                       title: "PERFIL",
                       onPressed: () {},
@@ -74,9 +69,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     margin: const EdgeInsets.only(left: 35, top: 20),
                     height: 45,
                     width: 250,
-                    decoration: BoxDecoration(
-                        color: HexColor("#E4FDFF"),
-                        borderRadius: BorderRadius.circular(17)),
+                    decoration: BoxDecoration(color: HexColor("#E4FDFF"), borderRadius: BorderRadius.circular(17)),
                     child: RoundedElevatedButton(
                       title: "PLANO DE SAÚDE",
                       onPressed: () {},
@@ -87,9 +80,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     margin: const EdgeInsets.only(left: 35, top: 20),
                     height: 45,
                     width: 250,
-                    decoration: BoxDecoration(
-                        color: HexColor("#E4FDFF"),
-                        borderRadius: BorderRadius.circular(17)),
+                    decoration: BoxDecoration(color: HexColor("#E4FDFF"), borderRadius: BorderRadius.circular(17)),
                     child: RoundedElevatedButton(
                       title: "FALE CONOSCO",
                       onPressed: () {},
@@ -100,9 +91,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     margin: const EdgeInsets.only(left: 35, top: 20),
                     height: 45,
                     width: 250,
-                    decoration: BoxDecoration(
-                        color: HexColor("#E4FDFF"),
-                        borderRadius: BorderRadius.circular(17)),
+                    decoration: BoxDecoration(color: HexColor("#E4FDFF"), borderRadius: BorderRadius.circular(17)),
                     child: RoundedElevatedButton(
                       title: "APAGAR PERFIL",
                       onPressed: () {},
@@ -113,9 +102,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     margin: const EdgeInsets.only(left: 35, top: 20),
                     height: 45,
                     width: 250,
-                    decoration: BoxDecoration(
-                        color: HexColor("#E4FDFF"),
-                        borderRadius: BorderRadius.circular(17)),
+                    decoration: BoxDecoration(color: HexColor("#E4FDFF"), borderRadius: BorderRadius.circular(17)),
                     child: RoundedElevatedButton(
                       title: "SAIR",
                       onPressed: () {},
@@ -125,16 +112,13 @@ class _ConfigPageState extends State<ConfigPage> {
                       margin: const EdgeInsets.only(left: 35, top: 20),
                       height: 50,
                       width: 250,
-                      decoration: BoxDecoration(
-                          color: HexColor("#E4FDFF"),
-                          borderRadius: BorderRadius.circular(17)),
+                      decoration: BoxDecoration(color: HexColor("#E4FDFF"), borderRadius: BorderRadius.circular(17)),
                       child: SwitchListTile(
                           title: const Text(
                             'Notificações de lembretes',
                             style: TextStyle(color: Color(0xFF12A1A7)),
                           ),
-                          contentPadding:
-                              const EdgeInsets.only(left: 10, top: 10),
+                          contentPadding: const EdgeInsets.only(left: 10, top: 10),
                           value: true,
                           onChanged: (bool value) {
                             setState(() {
@@ -146,16 +130,13 @@ class _ConfigPageState extends State<ConfigPage> {
                       margin: const EdgeInsets.only(left: 35, bottom: 35),
                       height: 50,
                       width: 250,
-                      decoration: BoxDecoration(
-                          color: HexColor("#E4FDFF"),
-                          borderRadius: BorderRadius.circular(17)),
+                      decoration: BoxDecoration(color: HexColor("#E4FDFF"), borderRadius: BorderRadius.circular(17)),
                       child: SwitchListTile(
                           title: const Text(
                             'Notificações de noticias',
                             style: TextStyle(color: Color(0xFF12A1A7)),
                           ),
-                          contentPadding:
-                              const EdgeInsets.only(left: 10, top: 10),
+                          contentPadding: const EdgeInsets.only(left: 10, top: 10),
                           value: false,
                           onChanged: (bool value) {
                             setState(() {
