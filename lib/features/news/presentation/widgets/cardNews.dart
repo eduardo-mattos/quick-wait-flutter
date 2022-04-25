@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:quick_wait_android/features/news/domain/entities/news_article.dart';
 
 class CardNews extends StatelessWidget {
-  dynamic news;
+  NewsArticle news;
   DateTime dateString;
-  CardNews({Key? key, required this.news, required this.dateString})
-      : super(key: key);
+  CardNews({Key? key, required this.news, required this.dateString}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print(news.title);
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Container(
@@ -35,23 +36,21 @@ class CardNews extends StatelessWidget {
                 height: 83,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(17.0),
-                  child: Image.network(
-                    news['urlToImage'],
-                    width: 164,
-                    height: 83,
-                    fit: BoxFit.cover,
-                  ),
+                  child: news.imageUrl != null
+                      ? Image.network(
+                          news.imageUrl ?? '',
+                          width: 164,
+                          height: 83,
+                          fit: BoxFit.cover,
+                        )
+                      : Container(),
                 ),
-                decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(17.0)),
+                decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.circular(17.0)),
               ),
               Container(
                 width: 180,
                 height: 83,
-                decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(17.0)),
+                decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.circular(17.0)),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Column(
@@ -60,7 +59,7 @@ class CardNews extends StatelessWidget {
                     children: [
                       Flexible(
                         child: Text(
-                          news['title'],
+                          news.title ?? '',
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
@@ -82,10 +81,7 @@ class CardNews extends StatelessWidget {
                         heightFactor: 0.2,
                         child: TextButton(
                           onPressed: () {
-                            Modular.to.pushNamed(
-                              "/listNews/news",
-                              arguments: news
-                            );
+                            Modular.to.pushNamed("/listNews/news", arguments: news);
                           },
                           child: const Text(
                             'Ir para noticia >',

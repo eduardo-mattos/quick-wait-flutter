@@ -4,8 +4,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:quick_wait_android/design_system/buttons/circular_button.dart';
 import 'package:quick_wait_android/features/profile/presentation/widgets/ProfileBackground.dart';
 
+import '../../domain/entities/news_article.dart';
+
 class CarouselNews extends StatelessWidget {
-  List news;
+  List<NewsArticle> news;
   CarouselNews({Key? key, required this.news}) : super(key: key);
 
   @override
@@ -30,16 +32,15 @@ class CarouselNews extends StatelessWidget {
                     return SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: ProfileBackground(
-                        imageUrl: i['urlToImage'],
+                        imageUrl: i.imageUrl,
                         child: Container(
                           alignment: Alignment.bottomLeft,
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: Text(
-                              i['title'],
+                              i.title.toString(),
                               textAlign: TextAlign.start,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 20),
+                              style: const TextStyle(color: Colors.white, fontSize: 20),
                             ),
                           ),
                         ),
